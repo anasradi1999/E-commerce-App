@@ -1,9 +1,7 @@
 import 'package:ecommerce_app/helper/router.dart';
-import 'package:ecommerce_app/views/screens/landing_page.dart';
 import 'package:flutter/material.dart';
 
 import 'helper/routes.dart';
-import 'views/screens/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +28,14 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
             borderSide: BorderSide(color: Colors.grey),
           ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: Colors.red),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: Colors.red),
+        ),
         ),
       ),
       onGenerateRoute: onGenerate,
