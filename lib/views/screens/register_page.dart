@@ -13,7 +13,20 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final _emailFocusNode = FocusNode();
+  final _nameFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
+
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _nameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +59,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
                           TextFormField(
                             controller: _emailController,
+                            focusNode: _emailFocusNode,
+                            onEditingComplete: ()=> FocusScope.of(context).requestFocus(_nameFocusNode),
                             validator: (value) =>
                             value!.isEmpty ? 'Email is required' : null,
                             decoration: InputDecoration(
@@ -53,6 +68,22 @@ class _RegisterPageState extends State<RegisterPage> {
                               fillColor: Colors.white,
                               focusColor: Theme.of(context).primaryColor,
                               labelText: 'Email',
+                            ),
+                          ),
+
+                          const SizedBox(height: 30),
+
+                          TextFormField(
+                            controller: _nameController,
+                            focusNode: _nameFocusNode,
+                            onEditingComplete: ()=> FocusScope.of(context).requestFocus(_passwordFocusNode),
+                            validator: (value) =>
+                            value!.isEmpty ? 'Name is required' : null,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              focusColor: Theme.of(context).primaryColor,
+                              labelText: 'Name',
                             ),
                           ),
 
@@ -77,6 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             alignment: Alignment.topRight,
                             child: InkWell(
                               onTap: () {
+                                _formKey.currentState!.reset();
                                 Navigator.pushReplacementNamed(context, AppRouters.loginPageRoutes);
                               },
                               child: Text('have an account? Login'),
@@ -86,6 +118,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           const SizedBox(height: 30),
 
                           MainButton(text: 'Sign Up', onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              debugPrint('Sign Up');
+                            }
                           }),
 
 
@@ -102,10 +137,24 @@ class _RegisterPageState extends State<RegisterPage> {
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.facebook, size: 34),
-                              SizedBox(width: 16),
-                              Icon(Icons.g_mobiledata, size: 46),
+                            children: [
+                              Container(
+                                  width: 70,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                  ),
+                                  child: const Icon(Icons.facebook, size: 34)),
+                              const SizedBox(width: 16),
+                              Container(
+                                  width: 70,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                  ),
+                                  child: const Icon(Icons.g_mobiledata, size: 46)),
                             ],
                           ),
                         ],

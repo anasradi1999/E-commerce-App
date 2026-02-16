@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/views/screens/home/bag_screen.dart';
-import 'package:ecommerce_app/views/screens/home/favorite_screen.dart';
-import 'package:ecommerce_app/views/screens/home/profile_screen.dart';
+import 'package:ecommerce_app/views/screens/home/ui/bag_screen.dart';
+import 'package:ecommerce_app/views/screens/home/ui/favorite_screen.dart';
+import 'package:ecommerce_app/views/screens/home/ui/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
