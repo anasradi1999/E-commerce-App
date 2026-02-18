@@ -46,26 +46,31 @@ class HomeScreen extends StatelessWidget {
                 BuildHeaderOfList(text: 'Sale', description: 'Super Summer Sale'),
                 SizedBox(height: 8,),
                 SizedBox(
-                  height: 300,
+                  height: 310,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: dumnyProducts.map((e) => Padding(
+                    children: dumnyProducts
+                        .where((product) => product.discontValue > 0)
+                        .map((e) => Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ListItemHome(product: e,),
-                    )).toList(),
+                      child: ListItemHome(
+                        product: e,
+                        nameList: 'Sale',
+                      ),
+                    ))
+                        .toList(),
                   ),
                 ),
                 SizedBox(height: 8,),
                 BuildHeaderOfList(text: 'New', description: 'Super Summer New'),
                 SizedBox(height: 8,),
-                SizedBox(height: 8,),
                 SizedBox(
-                  height: 300,
+                  height: 310,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: dumnyProducts.map((e) => Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ListItemHome(product: e,),
+                      child: ListItemHome(product: e,nameList: 'New',),
                     )).toList(),
                   ),
                 ),
